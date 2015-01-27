@@ -71,11 +71,11 @@ create table clientAbo(IdC number (4) not null,
 	prenom varchar2 (16) not null,
 	dateNais date not null,
 	adr varchar2 (50) not null,
-	remises varchar2 (5) not null,
+	remise varchar2 (5) not null,
 	dateAbo date not null,
 	constraint cab_pk1 primary key (IdC),
 	constraint cab_fk1 foreign key (IdC) references clients (IdC),
-	constraint cab_chk1 check (remises in ('true','false'))
+	constraint cab_chk1 check (remise in ('true','false'))
 );
 create table clientNabo(IdC number (4) not null,
 	constraint cna_fk1 foreign key(IdC) references clients(IdC)
