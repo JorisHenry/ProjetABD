@@ -73,7 +73,7 @@ public class CreateDatas {
 		}
 		// clients
 		for (i = 1; i <= 20; i++) {
-			Utils.ecrire("INSERT INTO clients VALUES ('"+i+"', null, '"+station+"', 'Libre' );");
+			//Utils.ecrire("INSERT INTO clients VALUES ('"+i+"', null, '"+station+"', 'Libre' );");
 		}
 		String cb = Utils.randomCB();
 		System.out.println(cb);
