@@ -1,8 +1,15 @@
 package fonctionnement;
 
-
+/**
+ * Class de création des datas
+ * @author Thomas
+ *
+ */
 public class CreateDatas {
-
+	/**
+	 * Création des insetions dans la bd
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Utils.viderfichier();
 		int i = 0;
@@ -66,7 +73,7 @@ public class CreateDatas {
 		}
 		// clients
 		for (i = 1; i <= 20; i++) {
-			//Utils.ecrire("INSERT INTO clients VALUES ('"+i+"', null, '"+station+"', 'Libre' );");
+			Utils.ecrire("INSERT INTO clients VALUES ('"+i+"', null, '"+station+"', 'Libre' );");
 		}
 		String cb = Utils.randomCB();
 		System.out.println(cb);

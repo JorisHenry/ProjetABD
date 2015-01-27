@@ -4,7 +4,18 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Classe des fonctions utiles
+ * 
+ * @author Thomas
+ *
+ */
 public class Utils {
+	/**
+	 * Cré un numéro de CD à 16 chiffres aléatoires
+	 * 
+	 * @return
+	 */
 	public static String randomCB() {
 		String numérocb = "";
 		for (int i = 0; i < 16; i++) {
@@ -14,6 +25,9 @@ public class Utils {
 		return numérocb;
 	}
 
+	/**
+	 * Vide le fichier de remplissage des tables
+	 */
 	public static void viderfichier() {
 		String adressedufichier = System.getProperty("user.dir") + "/" + "Tables/Datas.sql";
 		try {
@@ -29,6 +43,11 @@ public class Utils {
 		}
 	}
 
+	/**
+	 * Ecrit un texte dans le fichier des tables puis fait un retour à la ligne
+	 * 
+	 * @param texte
+	 */
 	public static void ecrire(String texte) {
 		String adressedufichier = System.getProperty("user.dir") + "/" + "Tables/Datas.sql";
 
