@@ -18,9 +18,16 @@ public class Location {
 	/**
 	 * Abonne le client au service et insérant dans la table client abonné et supprimant de client non abonné si besoin
 	 * @param conn
-	 * @param client L'ID du client
 	 */
-	public static void abonnement(Connection conn, int client){
+	public static void abonnement(Connection conn){
+		
+	}
+	
+	/**
+	 * Permet au client de louer un vélo, abonné ou non abonné
+	 * @param conn
+	 */
+	public static void louer(Connection conn){
 		
 	}
 	
