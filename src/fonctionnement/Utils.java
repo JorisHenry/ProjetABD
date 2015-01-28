@@ -24,6 +24,14 @@ public class Utils {
 		}
 		return numérocb;
 	}
+	public static String randomCode() {
+		String numérocb = "";
+		for (int i = 0; i < 8; i++) {
+			int chiffre = (int) (1 + (Math.random() * (59 - 1)));
+			numérocb = numérocb + Integer.toString(chiffre);
+		}
+		return numérocb;
+	}
 
 	/**
 	 * Vide le fichier de remplissage des tables

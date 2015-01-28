@@ -73,11 +73,12 @@ public class CreateDatas {
 		}
 		// clients
 		for (i = 1; i <= 20; i++) {
-			//Utils.ecrire("INSERT INTO clients VALUES ('"+i+"', null, '"+station+"', 'Libre' );");
+			Utils.ecrire("INSERT INTO clients VALUES ('"+i+"','"+ Utils.randomCB()+"'"+Utils.randomCode()+"' );");
 		}
-		String cb = Utils.randomCB();
-		System.out.println(cb);
+		// clients abo
+		for (i = 1; i <= 10; i++) {
+			Utils.ecrire("INSERT INTO clientAbo VALUES ('"+i+"', 'Emile', 'Kigali', '06-NOV-08', 'Rue du campus', 'non', '06-NOV-09');");
+		}
+	
 	}
-	
-	
 }
