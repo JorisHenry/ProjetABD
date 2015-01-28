@@ -19,7 +19,7 @@ public class Utils {
 	public static String randomCB() {
 		String numerocb = "";
 		for (int i = 0; i < 16; i++) {
-			int chiffre = (int) (1 + (Math.random() * (59 - 1)));
+			int chiffre = (int) (1 + (Math.random() * (9 - 1)));
 			numerocb = numerocb + Integer.toString(chiffre);
 		}
 		return numerocb;
@@ -85,7 +85,7 @@ public class Utils {
 	public static String randomCode() {
 		String code = "";
 		for (int i = 0; i < 8; i++) {
-			int chiffre = (int) (1 + (Math.random() * (59 - 1)));
+			int chiffre = (int) (1 + (Math.random() * (9 - 1)));
 			code = code + Integer.toString(chiffre);
 		}
 		return code;
