@@ -1,23 +1,17 @@
-package interfaces;
+package fonctionnement;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Scanner;
+import java.sql.*;
 
-import fonctionnement.DatabaseAccessProperties;
-import fonctionnement.SQLWarningsExceptions;
+public class test {
 
-public class Client {
 	private static final String configurationFile = "BD.properties";
 
-	public static void main(String[] args) {
-		System.out.println("Bienvenue dans l'interface client, veuillez saisir l'action à éxecuter (exit pour quitter)");
-		
+	public static void main(String args[]) {
 		try {
 			String jdbcDriver, dbUrl, username, password;
 
-			DatabaseAccessProperties dap = new DatabaseAccessProperties(configurationFile);
+			DatabaseAccessProperties dap = new DatabaseAccessProperties(
+					configurationFile);
 			jdbcDriver = dap.getJdbcDriver();
 			dbUrl = dap.getDatabaseUrl();
 			username = dap.getUsername();
@@ -27,15 +21,16 @@ public class Client {
 			Class.forName(jdbcDriver);
 
 			// Get a connection to the database
-			Connection conn = DriverManager.getConnection(dbUrl, username, password);
-			System.out.println("Connecté");
+			Connection conn = DriverManager.getConnection(dbUrl, username,
+					password);
 
 			// Print information about connection warnings
 			SQLWarningsExceptions.printWarnings(conn);
-
-			// Close the result set, statement and the connection
-			conn.close();
-
+			
+			System.out.println("test");
+			
+			
+			conn.close() ;
 		} catch (SQLException se) {
 
 			// Print information about SQL exceptions
@@ -47,7 +42,6 @@ public class Client {
 			e.printStackTrace();
 			return;
 		}
-
 	}
 
 }
