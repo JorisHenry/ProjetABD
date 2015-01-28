@@ -25,6 +25,72 @@ public class Utils {
 		return numerocb;
 	}
 
+	public static String randomJour() {
+		int num = (int) (01 + (Math.random() * (28 - 01)));
+		String jour = "";
+		jour = jour + Integer.toString(num);
+		if (jour.length() == 1) {
+			jour = "0" + jour;
+		}
+
+		return jour;
+	}
+
+	public static String randomMois() {
+		String Mois = "";
+		int num = (int) (1 + (Math.random() * (12 - 1)));
+		switch (num) {
+		case 1:
+			Mois = "JAN";
+			break;
+		case 2:
+			Mois = "FEB";
+			break;
+		case 3:
+			Mois = "MAR";
+			break;
+		case 4:
+			Mois = "APR";
+			break;
+		case 5:
+			Mois = "MAY";
+			break;
+		case 6:
+			Mois = "JUN";
+			break;
+		case 7:
+			Mois = "JUL";
+			break;
+		case 8:
+			Mois = "AUG";
+			break;
+		case 9:
+			Mois = "SEP";
+			break;
+		case 10:
+			Mois = "OCT";
+			break;
+		case 11:
+			Mois = "NOV";
+			break;
+		case 12:
+			Mois = "DEC";
+			break;
+		default:
+			break;
+		}
+		return Mois;
+	}
+
+	public static String randomCode() {
+		String code = "";
+		for (int i = 0; i < 8; i++) {
+			int chiffre = (int) (1 + (Math.random() * (59 - 1)));
+			code = code + Integer.toString(chiffre);
+		}
+		return code;
+	}
+
 	/**
 	 * Vide le fichier de remplissage des tables
 	 */

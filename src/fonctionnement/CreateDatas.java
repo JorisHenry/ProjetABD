@@ -16,23 +16,23 @@ public class CreateDatas {
 		// vélos hommes
 		for (i = 0; i < 20; i++) {
 			int annee = (int) (2014 + (Math.random() * (2015 - 2014)));
-			int mois = (int) (1 + (Math.random() * (12 - 1)));
-			int jour = (int) (1 + (Math.random() * (28 - 1)));
-			Utils.ecrire("INSERT INTO velos VALUES ('" + i + "', 'homme', '" + annee + "-" + mois + "-" + jour + "', 'OK');");
+			String mois = Utils.randomMois();
+			String jour = Utils.randomJour();
+			Utils.ecrire("INSERT INTO velos VALUES ('" + i + "', 'homme', to_date('" + annee + "-" + mois + "-" + jour + "','YYYY-MM-DD'), 'OK');");
 		}
 		// vélos femmes
 		for (i = 20; i < 40; i++) {
 			int annee = (int) (2014 + (Math.random() * (2015 - 2014)));
-			int mois = (int) (1 + (Math.random() * (12 - 1)));
-			int jour = (int) (1 + (Math.random() * (28 - 1)));
-			Utils.ecrire("INSERT INTO velos VALUES ('" + i + "', 'femme', '" + annee + "-" + mois + "-" + jour + "', 'OK');");
+			String mois = Utils.randomMois();
+			String jour = Utils.randomJour();
+			Utils.ecrire("INSERT INTO velos VALUES ('" + i + "', 'femme', to_date('" + annee + "-" + mois + "-" + jour + "','YYYY-MM-DD'), 'OK');");
 		}
 		// vélos enfants
 		for (i = 40; i < 60; i++) {
 			int annee = (int) (2014 + (Math.random() * (2015 - 2014)));
-			int mois = (int) (1 + (Math.random() * (12 - 1)));
-			int jour = (int) (1 + (Math.random() * (28 - 1)));
-			Utils.ecrire("INSERT INTO velos VALUES ('" + i + "', 'enfants', '" + annee + "-" + mois + "-" + jour + "', 'OK');");
+			String mois = Utils.randomMois();
+			String jour = Utils.randomJour();
+			Utils.ecrire("INSERT INTO velos VALUES ('" + i + "', 'enfants', to_date('" + annee + "-" + mois + "-" + jour + "','YYYY-MM-DD'), 'OK');");
 		}
 		// centre de maintenance
 		Utils.ecrire("INSERT INTO stations VALUES ('" + 0 + "', '50 rue De Gaulle', '20', '0');");
@@ -73,11 +73,15 @@ public class CreateDatas {
 		}
 		// clients
 		for (i = 1; i <= 20; i++) {
-			//Utils.ecrire("INSERT INTO clients VALUES ('"+i+"', null, '"+station+"', 'Libre' );");
+			Utils.ecrire("INSERT INTO clients VALUES ('"+i+"','"+ Utils.randomCB()+"'"+Utils.randomCode()+"' );");
 		}
-		String cb = Utils.randomCB();
-		System.out.println(cb);
+		// clients abo
+		for (i = 1; i <= 10; i++) {
+			Utils.ecrire("INSERT INTO clientAbo VALUES ('"+i+"', 'Emile', 'Kigali', '06-NOV-08', 'Rue du campus', 'non', '06-NOV-09');");
+		}
+		// clients non abo
+		
+		
+	
 	}
-	
-	
 }
