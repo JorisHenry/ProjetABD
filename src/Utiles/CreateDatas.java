@@ -1,5 +1,7 @@
 package Utiles;
 
+import javax.rmi.CORBA.Util;
+
 
 /**
  * Class de création des datas
@@ -100,6 +102,22 @@ public class CreateDatas {
 
 		Utils.ecrire("INSERT INTO reserver values ('2','3','8',to_date('2014,NOV,10','YYYY,MM,DD'));");
 		
+		
+		// Routines
+		Utils.ecrire("INSERT INTO routines values ('1', '1', NOW());");
+		Utils.ecrire("INSERT INTO routines values ('2', '2', NOW());");
+		
+		//Ordres
+		Utils.ecrire("INSERT INTO ordres values ('1', 'Aller station 4', '1');");
+		Utils.ecrire("INSERT INTO ordres values ('2', 'Deplacer 4 vélos', '2');");
+		Utils.ecrire("INSERT INTO ordres values ('3', 'Aller au centre de maintenance', '3');");
+		Utils.ecrire("INSERT INTO ordres values ('4', 'Aller station 4', '4');");
+		
+		// Defini
+		Utils.ecrire("INSERT INTO defini values ('1', '1');");
+		Utils.ecrire("INSERT INTO defini values ('1', '2');");
+		Utils.ecrire("INSERT INTO defini values ('2', '3');");
+		Utils.ecrire("INSERT INTO defini values ('2', '4');");
 	
 	}
 }
