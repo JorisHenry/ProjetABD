@@ -46,21 +46,18 @@ public class Routines {
 	}
 
 	/**
+	 * @throws SQLException 
 	 * 
 	 * 
 	 */
-	public static void declarerVeloEndommage(Connection conn, int IDV) {
+	public static void declarerVeloEndommage(Connection conn, int IDV) throws SQLException {
 		// Get a statement from the connection
-		try {
+	
 			conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			Statement stmt = conn.createStatement();
 			int res1 = stmt.executeUpdate("UPDATE velos " + "SET etat='KO'" + "WHERE IdV = " + IDV);
 			System.out.println("Le vélo, " + IDV + " est declaré endommagé, "+ res1+" lignes modifiées");
 			stmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 
 		
