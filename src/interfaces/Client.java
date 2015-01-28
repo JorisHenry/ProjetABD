@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import conducteur.Routines;
 import fonctionnement.DatabaseAccessProperties;
 import fonctionnement.SQLWarningsExceptions;
 
@@ -32,6 +33,8 @@ public class Client {
 
 			// Print information about connection warnings
 			SQLWarningsExceptions.printWarnings(conn);
+			
+			Routines.consulterRoutine(conn, 3);
 
 			// Close the result set, statement and the connection
 			conn.close();
