@@ -54,7 +54,7 @@ public class Exemples {
      * @param date : Date de la représentation
      * @throws SQLException : En cas d'erreur d'accès à la BDD
      */
-	public static void ReserveUnePlace(Connection conn, String categorie, String date) throws SQLException {
+	/**public static void ReserveUnePlace(Connection conn, String categorie, String date) throws SQLException {
 	      	// Get a statement from the connection
 	      	Statement stmt = conn.createStatement() ;
 	      	
@@ -143,5 +143,5 @@ public class Exemples {
 	      	
 	      
 	      	
-	   }	
+	   }	*/
 }
