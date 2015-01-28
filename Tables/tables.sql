@@ -53,7 +53,7 @@ create table valeur (IdV number (4) not null,
 	constraint val_chk1 check (etat in ('Vplus','Vmoins','Vnul'))
 );	
 create table bornettes(IdB number (5) not null,
-	IdVel number (4) not null,
+	IdVel number (4),
 	IdS number (4) not null,
 	etat varchar2 (6) not null,
 	constraint bor_pk1 primary key (IdB),
