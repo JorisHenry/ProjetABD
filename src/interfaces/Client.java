@@ -1,40 +1,51 @@
 package interfaces;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Scanner;
 
+import fonctionnement.DatabaseAccessProperties;
+import fonctionnement.SQLWarningsExceptions;
+
 public class Client {
+	private static final String configurationFile = "BD.properties";
 
 	public static void main(String[] args) {
 		System.out.println("Bienvenue dans l'interface client, veuillez saisir l'action à éxecuter (exit pour quitter)");
-		Scanner scan;
-		int choix;
-		String str;
-		do {
-			System.out
-					.println("1 : S'abonner au service \n"
-							+ "2 : Louer un vélo \n"
-							+ "3 : Réserver un vélo \n"
-							+ "4 : Rendre un vélo \n"
-							+ "5 : Afficher les stations Vplus/Vmoins");
+		
+		try {
+			String jdbcDriver, dbUrl, username, password;
 
-			scan = new Scanner(System.in);
-			str = scan.nextLine();
-			choix = Integer.parseInt(str);
-		} while (!(str.equals("1") || str.equals("2") || str.equals("3")));
+			DatabaseAccessProperties dap = new DatabaseAccessProperties(configurationFile);
+			jdbcDriver = dap.getJdbcDriver();
+			dbUrl = dap.getDatabaseUrl();
+			username = dap.getUsername();
+			password = dap.getPassword();
 
-		switch (choix) {
-		case 1:
-			System.out.println("Vous avez saisi : client. Redirection ...");
-			break;
-		case 2:
-			System.out.println("Vous avez saisi : conducteur. Redirection ...");
-			break;
-		case 3:
-			System.out
-					.println("Vous avez saisi : superviseur. Redirection ...");
-			break;
-		default:
-			break;
+			// Load the database driver
+			Class.forName(jdbcDriver);
+
+			// Get a connection to the database
+			Connection conn = DriverManager.getConnection(dbUrl, username, password);
+			System.out.println("Connecté");
+
+			// Print information about connection warnings
+			SQLWarningsExceptions.printWarnings(conn);
+
+			// Close the result set, statement and the connection
+			conn.close();
+
+		} catch (SQLException se) {
+
+			// Print information about SQL exceptions
+			SQLWarningsExceptions.printExceptions(se);
+
+			return;
+		} catch (Exception e) {
+			System.err.println("Exception: " + e.getMessage());
+			e.printStackTrace();
+			return;
 		}
 
 	}

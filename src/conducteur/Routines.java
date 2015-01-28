@@ -1,4 +1,7 @@
 package conducteur;
+
+import java.sql.Connection;
+
 /**
  * Classe regroupant les requêtes effectuées par les conducteurs sur les routines
  * @author Thomas
@@ -6,4 +9,7 @@ package conducteur;
  */
 public class Routines {
 
+	public static void consulterRoutine(Connection conn){
+		
+	}
 }

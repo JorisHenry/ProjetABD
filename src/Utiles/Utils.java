@@ -1,4 +1,4 @@
-package fonctionnement;
+package Utiles;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -12,17 +12,17 @@ import java.io.IOException;
  */
 public class Utils {
 	/**
-	 * Crï¿½ un numï¿½ro de CD ï¿½ 16 chiffres alï¿½atoires
+	 * Cré un numéro de CD à 16 chiffres aléatoires
 	 * 
 	 * @return
 	 */
 	public static String randomCB() {
-		String numerocb = "";
+		String numérocb = "";
 		for (int i = 0; i < 16; i++) {
 			int chiffre = (int) (1 + (Math.random() * (59 - 1)));
-			numerocb = numerocb + Integer.toString(chiffre);
+			numérocb = numérocb + Integer.toString(chiffre);
 		}
-		return numerocb;
+		return numérocb;
 	}
 
 	public static String randomJour() {
@@ -102,7 +102,7 @@ public class Utils {
 			output.write("");
 			output.flush();
 			output.close();
-			System.out.println("Fichier vidï¿½");
+			System.out.println("Fichier vidé");
 		} catch (IOException ioe) {
 			System.out.print("Erreur : ");
 			ioe.printStackTrace();
@@ -110,7 +110,7 @@ public class Utils {
 	}
 
 	/**
-	 * Ecrit un texte dans le fichier des tables puis fait un retour ï¿½ la ligne
+	 * Ecrit un texte dans le fichier des tables puis fait un retour à la ligne
 	 * 
 	 * @param texte
 	 */
@@ -128,7 +128,7 @@ public class Utils {
 			output.write(texte + "\n");
 			output.flush();
 			output.close();
-			System.out.println("Ligne ajoutï¿½e");
+			System.out.println("Ligne ajoutée");
 		} catch (IOException ioe) {
 			System.out.print("Erreur : ");
 			ioe.printStackTrace();
