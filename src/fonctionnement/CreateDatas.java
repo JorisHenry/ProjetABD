@@ -14,7 +14,7 @@ public class CreateDatas {
 		Utils.viderfichier();
 		int i = 0;
 		// vélos hommes
-		for (i = 0; i < 20; i++) {
+		for (i = 1; i < 20; i++) {
 			int annee = (int) (2014 + (Math.random() * (2015 - 2014)));
 			String mois = Utils.randomMois();
 			String jour = Utils.randomJour();
@@ -35,9 +35,8 @@ public class CreateDatas {
 			Utils.ecrire("INSERT INTO velos VALUES ('" + i + "', 'enfants', to_date('" + annee + "-" + mois + "-" + jour + "','YYYY-MM-DD'), 'OK');");
 		}
 		// centre de maintenance
-		Utils.ecrire("INSERT INTO stations VALUES ('" + 0 + "', '50 rue De Gaulle', '20', '0');");
-		// stations
 		Utils.ecrire("INSERT INTO stations VALUES ('" + 1 + "', '50 rue De Gaulle', '20', '0');");
+		// stations
 		Utils.ecrire("INSERT INTO stations VALUES ('" + 2 + "', '20 rue Berthelo', '20', '0');");
 		Utils.ecrire("INSERT INTO stations VALUES ('" + 3 + "', '14 avenue Foch', '20', '0');");
 		Utils.ecrire("INSERT INTO stations VALUES ('" + 4 + "', '2 Boulevard Lienard', '20', '0');");
@@ -47,8 +46,9 @@ public class CreateDatas {
 		Utils.ecrire("INSERT INTO stations VALUES ('" + 8 + "', '11 rue des Aborigenes', '20', '0');");
 		Utils.ecrire("INSERT INTO stations VALUES ('" + 9 + "', '56 Boulevard des Olives Vertes ', '20', '0');");
 		Utils.ecrire("INSERT INTO stations VALUES ('" + 10 + "', 'Centre du Bois de Boulogne', '20', '0');");
+		
 		// valeurs
-		for (i = 0; i < 30; i++) {
+		for (i = 1; i < 30; i++) {
 			int station = (int) (1 + (Math.random() * (10 - 1)));
 			String etat;
 			if (i % 3 == 0) {
@@ -65,7 +65,7 @@ public class CreateDatas {
 			}
 		}
 		// bornettes
-		for (i = 0; i < 30; i++) {
+		for (i = 1; i < 30; i++) {
 			int station = (int) (1 + (Math.random() * (10 - 1)));
 			int velo = (int) (1 + (Math.random() * (59 - 1)));
 			// Utils.ecrire("INSERT INTO bornettes VALUES ('"+i+"', '"+velo+"', '"+station+"', 'Libre' );");
@@ -73,14 +73,31 @@ public class CreateDatas {
 		}
 		// clients
 		for (i = 1; i <= 20; i++) {
-			Utils.ecrire("INSERT INTO clients VALUES ('"+i+"','"+ Utils.randomCB()+"'"+Utils.randomCode()+"' );");
+			Utils.ecrire("INSERT INTO clients VALUES ('"+i+"','"+ Utils.randomCB()+"', '"+Utils.randomCode()+"' );");
 		}
 		// clients abo
-		for (i = 1; i <= 10; i++) {
-			Utils.ecrire("INSERT INTO clientAbo VALUES ('"+i+"', 'Emile', 'Kigali', '06-NOV-08', 'Rue du campus', 'non', '06-NOV-09');");
+		for (i = 1; i < 10; i++) {
+			Utils.ecrire("INSERT INTO clientAbo VALUES ('"+i+"', 'Emile', 'Kigali', to_date('06-NOV-08', 'YYYY-MM-DD'), 'Rue du campus', 'non', to_date('06-NOV-09', 'YYYY-MM-DD'));");
 		}
 		// clients non abo
+		for (i = 10; i <= 20; i++) {
+			Utils.ecrire("INSERT INTO clientNAbo VALUES ('"+i+"');");
+		}
 		
+		// véhicules
+		for (i = 1; i <= 10; i++) {
+			Utils.ecrire("INSERT INTO vehicules VALUES ('"+i+"', 'Citroen', to_date('06-NOV-08', 'YYYY-MM-DD'), '10');");
+		}
+		// reservations
+
+		Utils.ecrire("INSERT INTO reservations values ('1');");
+		Utils.ecrire("INSERT INTO reservations values ('2');");
+		Utils.ecrire("INSERT INTO reservations values ('3');");
+		Utils.ecrire("INSERT INTO reservations values ('4');");
+
+		// reserver
+
+		Utils.ecrire("INSERT INTO reserver values ('2','3','8',to_date('2014,NOV,10','YYYY,MM,DD'));");
 		
 	
 	}
