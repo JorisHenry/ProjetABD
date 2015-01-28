@@ -12,17 +12,17 @@ import java.io.IOException;
  */
 public class Utils {
 	/**
-	 * Cré un numéro de CD à 16 chiffres aléatoires
+	 * Crï¿½ un numï¿½ro de CD ï¿½ 16 chiffres alï¿½atoires
 	 * 
 	 * @return
 	 */
 	public static String randomCB() {
-		String numérocb = "";
+		String numerocb = "";
 		for (int i = 0; i < 16; i++) {
 			int chiffre = (int) (1 + (Math.random() * (59 - 1)));
-			numérocb = numérocb + Integer.toString(chiffre);
+			numerocb = numerocb + Integer.toString(chiffre);
 		}
-		return numérocb;
+		return numerocb;
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class Utils {
 			output.write("");
 			output.flush();
 			output.close();
-			System.out.println("Fichier vidé");
+			System.out.println("Fichier vidï¿½");
 		} catch (IOException ioe) {
 			System.out.print("Erreur : ");
 			ioe.printStackTrace();
@@ -44,7 +44,7 @@ public class Utils {
 	}
 
 	/**
-	 * Ecrit un texte dans le fichier des tables puis fait un retour à la ligne
+	 * Ecrit un texte dans le fichier des tables puis fait un retour ï¿½ la ligne
 	 * 
 	 * @param texte
 	 */
@@ -62,7 +62,7 @@ public class Utils {
 			output.write(texte + "\n");
 			output.flush();
 			output.close();
-			System.out.println("Ligne ajoutée");
+			System.out.println("Ligne ajoutï¿½e");
 		} catch (IOException ioe) {
 			System.out.print("Erreur : ");
 			ioe.printStackTrace();
