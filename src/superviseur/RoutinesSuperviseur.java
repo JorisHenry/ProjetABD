@@ -1,11 +1,40 @@
 package superviseur;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-/**
- * Classe regroupant les requêtes effectuées par les superviseurs sur les routines
- * @author Thomas
- *
- */
+
 public class RoutinesSuperviseur {
+	/**
+	 * Etant donnï¿½ un achat, affiche les informations concernant lï¿½ensemble des places achetï¿½es.
+	 * 
+	 * @param conn : Connexion ï¿½ la BDD
+	 * @param IdStation : Identifiant de la station
+	 * @throws SQLException : En cas d'erreur d'accï¿½s ï¿½ la BDD
+	 */
+	public static void ConsulterVelosStation(Connection conn, int IdStation) throws SQLException {
+		// Get a statement from the connection
+		Statement stmt = conn.createStatement();
 
+		// Execute the query
+		ResultSet rs = stmt
+				.executeQuery("SELECT IdS, IdVelo "
+						+ "FROM possede natural join accueil "
+						+ "WHERE IdS = " + IdStation);
+
+		// Loop through the result set
+		if (rs.next()) {
+			System.out.println("Informations sur les Velos de la station " + IdStation + " :"+"\n");
+			do {	
+				System.out.println("Numero du velo : "+ rs.getString("IdVelo")+ "\n");
+			} while (rs.next());
+		} else {
+			System.out.println("Aucun velo n'est enregistrÃ© dans la station " + IdStation + ".");
+		}
+		// Close the result set, statement and the connection
+		rs.close();
+		stmt.close();
+	}
 }
