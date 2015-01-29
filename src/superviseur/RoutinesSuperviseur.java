@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 
 public class RoutinesSuperviseur {
@@ -81,10 +82,10 @@ public class RoutinesSuperviseur {
 	 * @param IdStation : Identifiant de la station
 	 * @throws SQLException : En cas d'erreur d'accès à la BDD
 	 */
-	public static void ajouterOrdre(Connection conn, int idOrdre, String defOrdre, int numOrd) throws SQLException {
+	public static void ajouterOrdre(Connection conn, int idOrdre, int numOrd) throws SQLException {
 		// Get a statement from the connection
 		Statement stmt = conn.createStatement();
-		
+		Scanner scan = new Scanner(System.in);
 		// Execute the query
 				ResultSet rs = stmt
 						.executeQuery("SELECT Id0, last(numOrd) as lastOrder "
@@ -92,7 +93,9 @@ public class RoutinesSuperviseur {
 								+ "WHERE IdO = " + idOrdre);
 
 				// Loop through the result set
-
+				System.out.println("D�finition de l'ordre ?");
+				String defOrdre = scan.next();
+				
 				if (rs.next()) {
 					int last = rs.getInt("lastOrder");
 					if (last == numOrd-1)
@@ -110,4 +113,8 @@ public class RoutinesSuperviseur {
 				rs.close();
 		stmt.close();
 	}
+	
+	
+	
+	
 }
