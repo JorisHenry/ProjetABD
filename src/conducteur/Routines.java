@@ -27,7 +27,7 @@ public class Routines {
 		Statement stmt = conn.createStatement();
 		// Execute the query
 		ResultSet rs = stmt.executeQuery("SELECT IdO, defi, numOrd"
-				+ "FROM routines natural join defini  " + "WHERE IdVeh = " + IDVR);
+				+ " FROM routines natural join defini  " + "WHERE IdVeh = " + IDVR);
 
 		// Loop through the result set
 		if (rs.next()) {
@@ -46,21 +46,12 @@ public class Routines {
 	}
 
 	/**
-	 * @throws SQLException 
-	 * 
-	 * 
+	 * Permet au conducteur de faire sa routine
+	 * @param conn
 	 */
-	public static void declarerVeloEndommage(Connection conn, int IDV) throws SQLException {
-		// Get a statement from the connection
-	
-			conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-			Statement stmt = conn.createStatement();
-			int res1 = stmt.executeUpdate("UPDATE velos " + "SET etat='KO'" + "WHERE IdV = " + IDV);
-			System.out.println("Le vélo, " + IDV + " est declaré endommagé, "+ res1+" lignes modifiées");
-			stmt.close();
+	public static void effectuerRoutine(Connection conn) {
 		
-
-		
-
 	}
+
+	
 }
