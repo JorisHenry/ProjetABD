@@ -50,10 +50,11 @@ public class Velos {
 
 		conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		Statement stmt = conn.createStatement();
-		int res1 = stmt.executeUpdate("UPDATE velos " + "SET etat='KO'" + "WHERE IdV = " + IDV);
-		System.out.println("Le vélo, " + IDV + " est declaré endommagé, " + res1
+		int res = stmt.executeUpdate("UPDATE velos " + "SET etat='KO'" + "WHERE IdV = " + IDV);
+	
+		System.out.println("Le vélo, " + IDV + " est declaré endommagé, " + res
 				+ " lignes modifiées");
+		
 		stmt.close();
-
 	}
 }
