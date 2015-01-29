@@ -26,6 +26,8 @@ public class StationVplusVmoins {
 			System.out.println("\n---------------------------------");
 
 		}
+		rs.close();
+		stmt.close();
 	}
 
 

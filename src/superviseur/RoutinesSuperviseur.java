@@ -95,7 +95,7 @@ public class RoutinesSuperviseur {
 
 				if (rs.next()) {
 					int last = rs.getInt("lastOrder");
-					if (last = numOrd-1)
+					if (last == numOrd-1)
 					System.out.println("Ajout de l'ordre dans la base?\n");
 					do {
 						// Add the row in ordres

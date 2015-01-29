@@ -35,7 +35,8 @@ public class Conducteur {
 			// Print information about connection warnings
 			SQLWarningsExceptions.printWarnings(conn);
 
-			Routines.consulterRoutine(conn, 2);
+			//Routines.consulterRoutine(conn, 2);
+			Routines.effectuerRoutine(conn, 2, null);
 
 			// Close the result set, statement and the connection
 			conn.close();

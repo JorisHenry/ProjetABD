@@ -60,20 +60,26 @@ public class Routines {
 		// Get a statement from the connection
 		conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 		Statement stmt = conn.createStatement();
-		
+
 		// Execute the query
 		ResultSet rs = stmt.executeQuery("SELECT IdO, defi, numord, dateR"
 				+ " FROM routines natural join defini natural join ordres" + " WHERE IdVehicule = "
-				+ IDVR);
-
+				+ IDVR + " ORDER BY numord;");
+		
+		
 		// Loop through the result set
 		if (rs.next()) {
-			System.out.println("Ordres à executer par le véhicule " + IDVR + " le "
+			System.out.println("Ordre à executer par le véhicule " + IDVR + " le "
 					+ rs.getString("dateR") + " :" + "\n");
 			do {
 				System.out.println("ID Ordre : " + rs.getString("IdO") + "\n" + "Description : "
 						+ rs.getString("defi") + "\n" + "Priorité : " + rs.getString("numOrd")
 						+ "\n");
+				
+				
+				
+				
+
 			} while (rs.next());
 		} else {
 			System.out.println("Aucune routine pour le véhicule " + IDVR + ".");
