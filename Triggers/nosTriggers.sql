@@ -28,7 +28,7 @@
 			Begin
 				select count(*) into valeurRetour  
 				from clientAbo
-				where idc = :new.idc and (trunc(SYSDATE) - trunc(dateAbo)) >= 360 ;
+				where IdC = :new.IdC and (trunc(SYSDATE) - trunc(dateAbo)) >= 360 ;
 				if (valeurRetour <> 0) THEN
 		   			raise_application_error(-20400,'on ne peut louer un velo car l abonnement n est pas à jour');
 				END IF;
@@ -38,7 +38,7 @@
 
 ------			- si il n’a pas déjà une réservation pour la même période.
 			
-			create or replace trigger louerVe
+			create or replace trigger louerVeloReservation
 			Before update or insert on louer
 			for each row
 			Declare
@@ -69,14 +69,14 @@
 */
 ------			- si il n’a pas 2 amendes non régularisées ou une amende de plus d’un mois
 
-			create or replace trigger louerVel
+			create or replace trigger louerVeloAmende
 			Before update on louer
 			for each row
 			Declare
 				valeurRetour integer;
 				pid_client integer;
 			Begin
-				verifierAmandes(:new.idc,valeurRetour);
+				verifierAmendes(:new.IdC,valeurRetour);
 				if (valeurRetour <> 0) THEN
 		   			raise_application_error(-20400,'on ne peut louer un velo car il y a 2 amandes non régularisées ou une amende de plus d 1 mois');
 				END IF;
@@ -143,7 +143,7 @@
 			Declare
 				valeurRetour integer;
 			Begin 
-				verifierperiodeAbonement(:new.idc,valeurRetour);
+				verifierperiodeAbonement(:new.IdC,valeurRetour);
 				IF (valeurRetour <> 0) THEN
 		   			raise_application_error(-20400,'on ne peut pas reserver un velo car l abonnement n est pas à jour');
 				END IF;
@@ -160,7 +160,7 @@
 			Declare
 				valeurRetour integer;
 			Begin
-				verifierperiodeAbonement(:new.idc,valeurRetour);
+				verifierperiodeAbonement(:new.IdC,valeurRetour);
 				IF (valeurRetour <> 0) THEN
 		   			raise_application_error(-20400,'on ne peut reserver un velo car il y a un autre reservation pour la même periode');
 				END IF;
@@ -176,21 +176,21 @@
 ------			- la durée de location (Normalement faut pas que ça depasse 12 heures).
 
 		create or replace trigger rendreVelo
-		before update on station 
+		before update on stations 
 		Declare 
 			valeurRetour integer;
 			Begin
-				select idc into pid_client -- client qui veut rendre le vélo.
+				select IdC into pid_client -- client qui veut rendre le vélo.
 				from rendre natural join station
-				where ids = :new.ids;
+				where IdS = :new.IdS;
 			
-				select ids into pid_station -- station à la quelle on va rendre le vélo.
+				select IdS into pid_station -- station à la quelle on va rendre le vélo.
 				from rendre natural join station 
-				where ids = :new.ids;
+				where IdS = :new.IdS;
 			
 				verifier_dureeLoc(pid_client,valeurRetour);
 				IF (valeurRetour <> 0) THEN
-		   			raise_application_error(-20380,'on ne peut pas rendre ce velo car ');
+		   			raise_application_error(-20380,'on ne peut pas rendre ce velo');
 				END IF;
 			END;
 			/
@@ -199,13 +199,13 @@
 ------			- que c’est bien le même vélo que celui qu’il a emprunté.
 
 		create or replace trigger rendreVel
-		before update or insert on acceuil 
+		before update or insert on accueil 
 		Declare 
 			valeurRetour integer;
 		Begin
-			verifier_velo(new:idvelo,valeurRetour);
+			verifier_velo(new:IdVelo,valeurRetour);
 			IF (valeurRetour = 0) THEN
-		   		raise_application_error(-20390,'on ne peut pas rendre ce velo car c est pas le même que celui emprunté');
+		   		raise_application_error(-20390,'on ne peut pas rendre ce velo car c est pas le meme que celui emprunte');
 			END IF;
 		END;
 		/
@@ -214,11 +214,11 @@
 
 
 		create or replace trigger rendreVelo
-		before update on station 
+		before update on stations 
 		Declare 
 			valeurRetour integer;
 		Begin
-			verifier_placeDispo(:new.ids,valeurRetour);
+			verifier_placeDispo(:new.IdS,valeurRetour);
 			IF (valeurRetour <> 0) THEN
 		   		raise_application_error(-20408,'on ne peut pas rendre ce velo parceque il y a pas assez de place dans la station');
 			END IF;
@@ -228,11 +228,11 @@
 -------			Lorsqu’un véhicule veut déposer un vélo en station on vérifie que son état n’est pas 'HS'
 
 		create or replace trigger deposer_velo
-		before update or insert on acceuil 
+		before update or insert on accueil 
 		Declare 
 			valeurRetour integer;
 		Begin
-			verif_etat_velo(:new.idv,valeurRetour);
+			verif_etat_velo(:new.IdVelo,valeurRetour);
 			IF (valeurRetour <> 0) THEN
 		   		raise_application_error(-20401,'on ne peut pas depose ce velo parceque son etat est HS');
 			END IF;
@@ -246,9 +246,9 @@
 		Declare 
 			valeurRetour integer;
 		Begin
-			verif_capac_veh(:new.idvehicule,valeurRetour);
+			verif_capac_veh(:new.IdVehicule,valeurRetour);
 			IF (valeurRetour <> 0) THEN
-		   		raise_application_error(-20402,'on ne peut pas prendre le velo numero' ||:new.idvelo ||' parceque la capacité de vehicule numero'|:new.idvehicule|'atteint sa capacité maximale');
+		   		raise_application_error(-20402,'on ne peut pas prendre le velo numero' ||:new.IdVelo ||' parceque la capacité de vehicule numero'|:new.IdVehicule|'atteint sa capacité maximale');
 			END IF;
 		END;
 		/
@@ -257,14 +257,14 @@
 		--Trigger qui verifie que le numero d'un ticket de reduction n'existe pas deja
 
 		create or replace trigger checkNumeroReduction
-		before insert or update on remiseV
+		before insert or update on remise
 		FOR each ROW
 		declare
-			num number(2);
+			num integer;
 		begin
-		select count(idRem) into num
-		from remiseV
-		where idRem = :new.idRem;	
+		select count(idR) into num
+		from remise
+		where IdR = :new.IdR;	
 		if(num > 0) then
 			Raise_application_error(-2010, 'On ne peut attribuer un numero qui existe deja');
 		end if;
