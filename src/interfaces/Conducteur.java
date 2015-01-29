@@ -9,12 +9,13 @@ import conducteur.Routines;
 import fonctionnement.DatabaseAccessProperties;
 import fonctionnement.SQLWarningsExceptions;
 
-public class Client {
+public class Conducteur {
 	private static final String configurationFile = "BD.properties";
 
 	public static void main(String[] args) {
-		System.out.println("Bienvenue dans l'interface client, veuillez saisir l'action à éxecuter (exit pour quitter)");
-		
+		System.out
+				.println("Bienvenue dans l'interface véhicule, veuillez saisir l'action à éxecuter (exit pour quitter)");
+
 		try {
 			String jdbcDriver, dbUrl, username, password;
 
@@ -33,7 +34,7 @@ public class Client {
 
 			// Print information about connection warnings
 			SQLWarningsExceptions.printWarnings(conn);
-			
+
 			Routines.consulterRoutine(conn, 3);
 
 			// Close the result set, statement and the connection

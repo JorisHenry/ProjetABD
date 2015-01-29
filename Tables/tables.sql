@@ -30,11 +30,11 @@ drop table velos ;
 /******************CREATION DES TABLES***********************/
 /************************************************************/
 
-create table velos(IdV number (4) not null, 
+create table velos(IdVelo number (4) not null, 
 	modele varchar2 (16) not null,
 	dateMS date not null,
 	etat varchar2 (2) not null,
-	constraint vel_pk1 primary key(IdV),
+	constraint vel_pk1 primary key(IdVelo),
 	constraint vel_chk1 check (etat in ('OK','HS'))
 );
 create table stations(IdS number (4) not null,
@@ -43,22 +43,22 @@ create table stations(IdS number (4) not null,
 	nbVelo number (4) not null,
 	constraint sta_pk1 primary key (IdS)
 );
-create table valeur (IdV number (4) not null,
+create table valeur (IdValeur number (4) not null,
 	IdS number (4) not null,
 	etat varchar2 (6) not null,
 	dateDeb date, 
 	dateFin date,
-	constraint val_pk1 primary key (IdV),
+	constraint val_pk1 primary key (IdValeur),
 	constraint val_fk1 foreign key (IdS) references stations (IdS),
 	constraint val_chk1 check (etat in ('Vplus','Vmoins','Vnul'))
 );	
 create table bornettes(IdB number (5) not null,
-	IdVel number (4),
+	IdVelo number (4),
 	IdS number (4) not null,
 	etat varchar2 (6) not null,
 	constraint bor_pk1 primary key (IdB),
 	constraint bor_fk1 foreign key (IdS) references stations (IdS),
-	constraint bor_fk2 foreign key (IdVel) references velos (IdV),
+	constraint bor_fk2 foreign key (IdVelo) references velos (IdVelo),
 	constraint bor_chk1 check (etat in ('Libre','Occupe','HS'))
 );
 create table clients(IdC number (4) not null,
@@ -94,11 +94,11 @@ create table amendes(IdA number (4) not null,
 	constraint am_fk1 foreign key (IdC) references clientAbo(IdC),
 	constraint am_chk1 check (statut in ('Paye','Impaye'))
 );
-create table vehicules(IdV number (4) not null,
+create table vehicules(IdVehicule number (4) not null,
 	modele varchar2 (16) not null,
 	dateMx date not null,
 	capacite number (2) not null,
-	constraint veh_pk2 primary key (IdV)
+	constraint veh_pk2 primary key (IdVehicule)
 );
 create table ordres(IdO number (4) not null, 
 	defi varchar2(140) not null, 
@@ -106,10 +106,10 @@ create table ordres(IdO number (4) not null,
 	constraint ord_pk1 primary key (IdO)
 );
 create table routines(IdR number (4) not null,
-	IdVeh number (4) not null, 
+	IdVehicule number (4) not null, 
 	dateR date not null,
 	constraint rou_pk1 primary key (IdR),
-	constraint rou_fk1 foreign key (IdVeh) references vehicules (IdV)
+	constraint rou_fk1 foreign key (IdVehicule) references vehicules (IdVehicule)
 );
 create table reservations(IdR number (4) not null,
 	constraint res_pk1 primary key (IdR)
@@ -139,22 +139,22 @@ create table reserver (IdR number(4) not null,
 	constraint rsv_fk3 foreign key (IdS) references stations (IdS)
 );
 create table louer(IdC number (4) not null,
-	IdV number (4) not null,
+	IdVelo number (4) not null,
 	dateLoc date not null,
-	constraint lou_pk1 primary key (IdC, IdV, dateLoc),
+	constraint lou_pk1 primary key (IdC, IdVelo, dateLoc),
 	constraint lou_fk1 foreign key (IdC) references clients (IdC),
-	constraint lou_fk2 foreign key (IdV) references velos (IdV)
+	constraint lou_fk2 foreign key (IdVelo) references velos (IdVelo)
 );
-create table deplacer(IdVeh number (4)not null,
-	IdVel number (4) not null,
-	constraint dep_pk1 primary key (IdVeh, IdVel),
-	constraint dep_fk1 foreign key (IdVel) references velos (IdV),
-	constraint dep_fk2 foreign key (IdVeh) references vehicules (IdV)
+create table deplacer(IdVehicule number (4)not null,
+	IdVelo number (4) not null,
+	constraint dep_pk1 primary key (IdVehicule, IdVelo),
+	constraint dep_fk1 foreign key (IdVelo) references velos (IdVelo),
+	constraint dep_fk2 foreign key (IdVehicule) references vehicules (IdVehicule)
 );
-create table accueil(IdV number (4) not null,
+create table accueil(IdVelo number (4) not null,
 	IdB number (4) not null,
-	constraint acc_pk1 primary key (IdV, IdB),
-	constraint acc_fk1 foreign key (IdV) references velos (IdV),
+	constraint acc_pk1 primary key (IdVelo, IdB),
+	constraint acc_fk1 foreign key (IdVelo) references velos (IdVelo),
 	constraint acc_fk2 foreign key (IdB) references bornettes (IdB)
 );
 create table defini(IdR number (4) not null,
@@ -164,12 +164,12 @@ create table defini(IdR number (4) not null,
 	constraint def_fk2 foreign key (IdO) references ordres (IdO)
 );
 create table feedback (IdO number (4) not null,
-	IdVeh number (4) not null,
+	IdVehicule number (4) not null,
 	etat varchar2 (6) not null,
 	notification varchar (140),
-	constraint fee_pk1 primary key (IdO, IdVeh),
+	constraint fee_pk1 primary key (IdO, IdVehicule),
 	constraint fee_fk1 foreign key (Ido) references ordres (IdO),
-	constraint fee_fk2 foreign key (IdVeh) references vehicules (IdV),
+	constraint fee_fk2 foreign key (IdVehicule) references vehicules (IdVehicule),
 	constraint fee_chk1 check (etat in ('Valide','Annule'))
 );
 create table possede(IdS number (4) not null,
