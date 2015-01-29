@@ -108,7 +108,6 @@ public class RoutinesSuperviseur {
 				}
 				// Close the result set, statement and the connection
 				rs.close();
-
 		stmt.close();
 	}
 }

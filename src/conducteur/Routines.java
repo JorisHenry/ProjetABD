@@ -27,7 +27,7 @@ public class Routines {
 		conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		Statement stmt = conn.createStatement();
 		// Execute the query
-		ResultSet rs = stmt.executeQuery("SELECT IdO, defi, numord, dateR"
+		ResultSet rs = stmt.executeQuery("SELECT Ido, defi, numord, dateR"
 				+ " FROM routines natural join defini natural join ordres" + " WHERE IdVehicule = "
 				+ IDVR);
 
