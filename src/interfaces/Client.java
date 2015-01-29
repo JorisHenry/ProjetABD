@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import client.StationVplusVmoins;
 import conducteur.Routines;
 import fonctionnement.DatabaseAccessProperties;
 import fonctionnement.SQLWarningsExceptions;
@@ -13,7 +14,7 @@ public class Client {
 	private static final String configurationFile = "BD.properties";
 
 	public static void main(String[] args) {
-		System.out.println("Bienvenue dans l'interface client, veuillez saisir l'action à éxecuter (exit pour quitter)");
+		System.out.println("Bienvenue dans l'interface client, veuillez saisir l'action ï¿½ ï¿½xecuter (exit pour quitter)");
 		
 		try {
 			String jdbcDriver, dbUrl, username, password;
@@ -29,12 +30,13 @@ public class Client {
 
 			// Get a connection to the database
 			Connection conn = DriverManager.getConnection(dbUrl, username, password);
-			System.out.println("Connecté");
+			System.out.println("Connectï¿½");
 
 			// Print information about connection warnings
 			SQLWarningsExceptions.printWarnings(conn);
 			
-			Routines.consulterRoutine(conn, 3);
+			//Routines.consulterRoutine(conn, 3);
+			StationVplusVmoins.afficherStations(conn,"Vmoins");
 
 			// Close the result set, statement and the connection
 			conn.close();
