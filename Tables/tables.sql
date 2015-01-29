@@ -135,7 +135,7 @@ create table reserver (IdR number(4) not null,
 	dateR date not null,
 	constraint rsv_pk1 primary key (IdR, IdC, IdS),
 	constraint rsv_fk1 foreign key (IdR) references reservations (IdR),
-	constraint rsv_fk2 foreign key (IdC) references clients (IdC),
+	constraint rsv_fk2 foreign key (IdC) references clientAbo (IdC),
 	constraint rsv_fk3 foreign key (IdS) references stations (IdS)
 );
 create table louer(IdC number (4) not null,
