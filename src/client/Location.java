@@ -10,21 +10,42 @@ import java.util.Date;
 
 
 /**
- * Requêtes en rapport avec la location d'un vélo
+ * Requï¿½tes en rapport avec la location d'un vï¿½lo
  * @author Thomas
  *
  */
 public class Location {
 	/**
-	 * Abonne le client au service et insérant dans la table client abonné et supprimant de client non abonné si besoin
+	 * Abonne le client au service et insï¿½rant dans la table client abonnï¿½ et supprimant de client non abonnï¿½ si besoin
 	 * @param conn
 	 */
 	public static void abonnement(Connection conn){
-		
+		// Get a statement from the connection
+				conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+				Statement stmt = conn.createStatement();
+				// Execute the query
+				ResultSet rs = stmt.executeQuery("");
+
+				// Loop through the result set
+				if (rs.next()) {
+					System.out.println("Ordres ï¿½ executer par le vï¿½hicule " + IDVR + " :" + "\n");
+					do {
+						System.out.println("ID Ordre : " + rs.getString("IdO") + "\n" + "Description : "
+								+ rs.getString("defi") + "\n" + "Prioritï¿½ : " + rs.getString("numOrd")
+								+ "\n");
+					} while (rs.next());
+				} else {
+					System.out.println("Aucune routine pour le vï¿½hicule " + IDVR + ".");
+				}
+				// Close the result set, statement and the connection
+				rs.close();
+				stmt.close();
+			}
+
 	}
 	
 	/**
-	 * Permet au client de louer un vélo, abonné ou non abonné
+	 * Permet au client de louer un vï¿½lo, abonnï¿½ ou non abonnï¿½
 	 * @param conn
 	 */
 	public static void louer(Connection conn){
